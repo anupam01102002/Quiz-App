@@ -6,9 +6,6 @@ void main() {
   runApp(MyApp());
 }
 
-var _questionindex = 0;
-var _totalScore = 0;
-
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -47,6 +44,17 @@ class _MyAppState extends State<MyApp> {
       ],
     },
   ];
+
+  var _questionindex = 0;
+  var _totalScore = 0;
+
+  void _resetQuiz() {
+    setState(() {
+      _questionindex = 0;
+      _totalScore = 0;
+    });
+  }
+
   void _answerQuestion(int score) {
     _totalScore += score;
 
@@ -74,7 +82,7 @@ class _MyAppState extends State<MyApp> {
                 questionindex: _questionindex,
                 questions: questions,
               )
-            : Result(_totalScore),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
